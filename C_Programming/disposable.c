@@ -1,8 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define PERCENTAGE_SYMBOL_COUNT 52
+#define EQUAL_SYMBOL_COUNT 45
+#define HYPHEN_SYMBOL_COUNT 45
+#define STRING_SIZE 50
+
 typedef struct {
-    char first[50], last[50];
+    char first[STRING_SIZE], last[STRING_SIZE];
     unsigned int age;
 } User;
 
@@ -12,7 +17,7 @@ void printSymbol(char symbol, unsigned int count) {
         printf("%c", symbol);
     printf("\n");
 }
-void printWelcomeMsg(int argc, char *argv[]) {
+void printArguementMsg(int argc, char *argv[]) {
     for (int i = 1; i < argc; i++) {  // --- (Task 2)
         printf("%s ", argv[i]);
     }
@@ -22,7 +27,7 @@ void printWelcomeMsg(int argc, char *argv[]) {
 void printWelcomeBanner(int argc, char *argv[], int count) {
     printf("\n");
     printSymbol('%', count);
-    printWelcomeMsg(argc, argv);
+    printArguementMsg(argc, argv);
     // printf("|   Welcome to the UNIX C Programming Environment   |\n");
     printSymbol('%', count);
 }
@@ -164,18 +169,15 @@ void writeModifiedDataToFile(char file_name[], User *user1, User *user2, int yea
 int main(int argc, char *argv[]) {
     char input_file[] = "input.txt", output_file[] = "output.txt";
     int years = 10;
-    int percent_symbol_count = 53,
-        equal_symbol_count = 45,
-        hyphen_symbol_count = 45;
 
-    printWelcomeBanner(argc, argv, percent_symbol_count);  // --- (Task 1)
+    printWelcomeBanner(argc, argv, PERCENTAGE_SYMBOL_COUNT);  // --- (Task 1)
 
     User current_user;  // --- (Task 3.a)
-    readInputKeyboard(&current_user, hyphen_symbol_count);
+    readInputKeyboard(&current_user, HYPHEN_SYMBOL_COUNT);
 
     User file_user = readInputFile(input_file);  // --- (Task 3.b)
 
-    modifyInput(&current_user, &file_user, years, equal_symbol_count);  // --- (Task 3.c)
+    modifyInput(&current_user, &file_user, years, EQUAL_SYMBOL_COUNT);  // --- (Task 3.c)
 
     printFormattedOutput(&current_user, &file_user, years);  // --- (Task 3.d)
 
